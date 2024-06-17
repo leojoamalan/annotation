@@ -4,10 +4,9 @@ from torchvision import transforms
 from PIL import Image
 
 # Function to load the model
-def load_model(model_path):
-    model = torch.load(model_path, map_location=torch.device('cpu'))  # Load model
-    model.eval()  # Set model to evaluation mode
-    return model
+model = torch.load(model_path, map_location=torch.device('cpu'))  # Load model
+model.eval()  # Set model to evaluation mode
+return model
 
 # Function to preprocess the image
 def preprocess_image(image):
