@@ -102,7 +102,7 @@ def main():
         st.image(image, caption='Uploaded Image.', use_column_width=True)
 
         # Load YOLO NAS model (replace with your model path)
-        model_path = 'https://raw.githubusercontent.com/yourusername/yolo-nas-model-deployment/main/yolo_nas_weights.pt'  # Update with your GitHub URL
+        model_path = 'best_model.h5'  # Update with your GitHub URL
         model = load_yolo_nas_model(model_path)
 
         # Perform object detection
