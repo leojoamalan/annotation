@@ -9,4 +9,3 @@ torchvision
 tensorflow
 pillow
 opencv-python
-best_model.pth
