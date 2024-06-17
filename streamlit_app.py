@@ -164,8 +164,8 @@ def main():
         st.image(image, caption='Uploaded Image.', use_column_width=True)
 
         # Define model path and URL
-        model_url = 'https://github.com/yourusername/yolo-nas-model-deployment/raw/main/best_model.h5'  # Update with your GitHub URL
-        model_path = 'best_model.h5'
+        model_url = 'https://github.com/leojoamalan/annotation/blob/main/best_model.pth'  # Update with your GitHub URL
+        model_path = 'best_model.pth'
 
         # Download and load the YOLO NAS model
         download_model(model_url, model_path)
