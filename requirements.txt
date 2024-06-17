@@ -8,4 +8,4 @@ torch
 torchvision
 tensorflow
 pillow
-cv2
+opencv-python
