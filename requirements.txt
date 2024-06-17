@@ -1,3 +1,9 @@
 altair
 pandas
 streamlit
+super-gradients
+numpy
+maplotlib
+torch
+torchvision
+tensorflow
