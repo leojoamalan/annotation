@@ -4,7 +4,7 @@ from torchvision import transforms
 from PIL import Image
 
 # Load the pre-trained model
-model_path = 'path_to_model.pth'  # Replace with the actual path
+model_path = 'best_model.pth'  # Replace with the actual path
 model = torch.load(model_path)
 model.eval()  # Set the model to evaluation mode
 
