@@ -9,4 +9,3 @@ torchvision
 tensorflow
 pillow
 opencv-python
-libGL.so.1
