@@ -3,7 +3,7 @@ pandas
 streamlit
 super-gradients
 numpy
-maplotlib
+matplotlib
 torch
 torchvision
 tensorflow
