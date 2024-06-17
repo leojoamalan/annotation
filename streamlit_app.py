@@ -62,20 +62,20 @@ import torch
 from io import BytesIO
 import requests
 
-# Function to load YOLOv8 model
-def load_yolov8_model(weights_path):
-    # Define and load your YOLOv8 model here
+# Function to load YOLO NAS model
+def load_yolo_nas_model(weights_path):
+    # Define and load your YOLO NAS model here
     # Example:
-    class YOLOv8(torch.nn.Module):
+    class YOLONAS(torch.nn.Module):
         def __init__(self):
-            super(YOLOv8, self).__init__()
+            super(YOLONAS, self).__init__()
             # Define your model layers
 
         def forward(self, x):
             # Implement your forward pass logic
             return x
 
-    model = YOLOv8()
+    model = YOLONAS()
     checkpoint = torch.load(weights_path, map_location='cpu')
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()
@@ -90,7 +90,7 @@ def detect_objects(image, model):
     return detections
 
 def main():
-    st.title('YOLOv8 Object Detection')
+    st.title('YOLO NAS Object Detection')
     st.write('Upload an image for object detection')
 
     # File uploader
@@ -101,9 +101,9 @@ def main():
         image = Image.open(uploaded_file)
         st.image(image, caption='Uploaded Image.', use_column_width=True)
 
-        # Load YOLOv8 model (replace with your model path)
-        model_path = 'https://raw.githubusercontent.com/yourusername/yolov8-model-deployment/main/yolov8_weights.pt'  # Update with your GitHub URL
-        model = load_yolov8_model(model_path)
+        # Load YOLO NAS model (replace with your model path)
+        model_path = 'https://raw.githubusercontent.com/yourusername/yolo-nas-model-deployment/main/yolo_nas_weights.pt'  # Update with your GitHub URL
+        model = load_yolo_nas_model(model_path)
 
         # Perform object detection
         detections = detect_objects(image, model)
