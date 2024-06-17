@@ -55,83 +55,17 @@
 #         predicted_class = torch.argmax(output).item()
 
 #     # Display prediction
-#     st.write(f'Prediction: {predicted_class}')
-# import streamlit as st
-# from PIL import Image
-# import tensorflow as tf
-# import requests
-# from io import BytesIO
-
-# # Function to load YOLO NAS model
-# def load_yolo_nas_model(weights_path):
-#     # Define and load your YOLO NAS model here
-#     # Example:
-#     model = tf.keras.models.load_model(weights_path)
-#     return model
-
-# def detect_objects(image, model):
-#     # Perform object detection here
-#     # Example: process image and get detections
-#     # Replace this with your actual detection code
-#     detections = model.predict(image)
-#     return detections
-
-# def main():
-#     st.title('YOLO NAS Object Detection')
-#     st.write('Upload an image for object detection')
-
-#     # File uploader
-#     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
-
-#     if uploaded_file is not None:
-#         # Display uploaded image
-#         image = Image.open(uploaded_file)
-#         st.image(image, caption='Uploaded Image.', use_column_width=True)
-
-#         # Load YOLO NAS model (replace with your model path)
-#         model_path = 'https://github.com/yourusername/yolo-nas-model-deployment/raw/main/best_model.h5'  # Update with your GitHub URL
-#         model = load_yolo_nas_model(model_path)
-
-#         # Preprocess the image for your model
-#         # Example: resize image, normalize pixel values, etc.
-#         image_array = preprocess_image(image)
-
-#         # Perform object detection
-#         detections = detect_objects(image_array, model)
-
-#         # Display detection results
-#         st.subheader('Detection Results:')
-#         st.write(detections)  # Replace with your display logic
-
-# def preprocess_image(image):
-#     # Example: Resize image to match model input size and normalize pixel values
-#     resized_image = image.resize((224, 224))  # Example resizing
-#     normalized_image = tf.keras.applications.mobilenet_v2.preprocess_input(tf.image.img_to_float32(resized_image))
-#     return normalized_image
-
-# if __name__ == "__main__":
-#     main()
+#    st.write(f'Prediction: {predicted_class}')
 import streamlit as st
 from PIL import Image
 import tensorflow as tf
 import requests
 from io import BytesIO
-import os
-
-# Function to download the model from GitHub if not already downloaded
-def download_model(url, filename):
-    if not os.path.exists(filename):
-        st.write(f"Downloading model from {url}...")
-        response = requests.get(url)
-        with open(filename, 'wb') as f:
-            f.write(response.content)
-        st.write("Model downloaded successfully.")
-    else:
-        st.write("Model already downloaded.")
 
 # Function to load YOLO NAS model
 def load_yolo_nas_model(weights_path):
-    # Load the YOLO NAS model from the local file
+    # Define and load your YOLO NAS model here
+    # Example:
     model = tf.keras.models.load_model(weights_path)
     return model
 
@@ -139,17 +73,8 @@ def detect_objects(image, model):
     # Perform object detection here
     # Example: process image and get detections
     # Replace this with your actual detection code
-    image = preprocess_image(image)
-    image = tf.expand_dims(image, axis=0)  # Add batch dimension
     detections = model.predict(image)
     return detections
-
-def preprocess_image(image):
-    # Example: Resize image to match model input size and normalize pixel values
-    resized_image = image.resize((224, 224))  # Example resizing
-    image_array = tf.keras.preprocessing.image.img_to_array(resized_image)
-    normalized_image = tf.keras.applications.mobilenet_v2.preprocess_input(image_array)
-    return normalized_image
 
 def main():
     st.title('YOLO NAS Object Detection')
@@ -163,20 +88,26 @@ def main():
         image = Image.open(uploaded_file)
         st.image(image, caption='Uploaded Image.', use_column_width=True)
 
-        # Define model path and URL
-        model_url = 'https://github.com/leojoamalan/annotation/blob/main/best_model.pth'  # Update with your GitHub URL
-        model_path = 'best_model.pth'
-
-        # Download and load the YOLO NAS model
-        download_model(model_url, model_path)
+        # Load YOLO NAS model (replace with your model path)
+        model_path = 'https://github.com/leojoamalan/annotation/blob/main/best_model.pth'  # Update with your GitHub URL
         model = load_yolo_nas_model(model_path)
 
+        # Preprocess the image for your model
+        # Example: resize image, normalize pixel values, etc.
+        image_array = preprocess_image(image)
+
         # Perform object detection
-        detections = detect_objects(image, model)
+        detections = detect_objects(image_array, model)
 
         # Display detection results
         st.subheader('Detection Results:')
         st.write(detections)  # Replace with your display logic
+
+def preprocess_image(image):
+    # Example: Resize image to match model input size and normalize pixel values
+    resized_image = image.resize((224, 224))  # Example resizing
+    normalized_image = tf.keras.applications.mobilenet_v2.preprocess_input(tf.image.img_to_float32(resized_image))
+    return normalized_image
 
 if __name__ == "__main__":
     main()
