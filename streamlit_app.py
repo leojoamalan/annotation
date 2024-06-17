@@ -21,8 +21,8 @@ def preprocess_image(image):
     return image.unsqueeze(0)  # Add batch dimension
 
 # Load the model
-model_path = 'path_to_your_model.pth'  # Replace with your model path
-model = load_model(model_path)
+model_path = 'best_model.pth'  # Replace with your model path
+model = load_model('best_model.pth')
 
 # Streamlit app
 st.title('Image Classification with PyTorch')
