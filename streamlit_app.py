@@ -4,9 +4,9 @@ from torchvision import transforms
 from PIL import Image
 
 # Function to load the model
+model_path = 'best_model.pth'
 model = torch.load(model_path, map_location=torch.device('cpu'))  # Load model
 model.eval()  # Set model to evaluation mode
-return model
 
 # Function to preprocess the image
 def preprocess_image(image):
@@ -20,8 +20,7 @@ def preprocess_image(image):
     return image.unsqueeze(0)  # Add batch dimension
 
 # Load the model
-model_path = 'best_model.pth'  # Replace with your model path
-model = load_model('best_model.pth')
+  # Replace with your model path
 
 # Streamlit app
 st.title('Image Classification with PyTorch')
