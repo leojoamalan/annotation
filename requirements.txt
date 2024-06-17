@@ -7,5 +7,5 @@ matplotlib
 torch
 torchvision
 tensorflow
-opencv-python
 pillow
+cv2
